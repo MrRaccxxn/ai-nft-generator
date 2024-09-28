@@ -31,6 +31,8 @@ function App() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     setProvider(provider);
 
+    console.log("provider", provider)
+
     const network = await provider.getNetwork();
 
     const nft = new ethers.Contract(
@@ -118,13 +120,13 @@ function App() {
     const signer = await provider.getSigner();
     const transaction = await nft
       .connect(signer)
-      .mint(tokenURI, { value: ethers.utils.parseUnits("1", "ether") });
+      .mint(tokenURI, { value: ethers.utils.parseUnits("0", "ether") });
     await transaction.wait();
   };
 
   useEffect(() => {
     loadBlockchainData();
-  }, []);
+  }, [window.ethereum]);
 
   return (
     <div>
